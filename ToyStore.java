@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.charset.Charset;
 
 public class ToyStore {
     private List<Toy> toys = new ArrayList<>();
@@ -44,11 +45,17 @@ public class ToyStore {
         }
     }
 
+    
     public void loadToys() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME)) ) {
-            toys = (List<Toy>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
+        ois.readObject();
+        
+        Object obj = ois.readObject();
+        if (obj instanceof List<?>) {
+            toys = (List<Toy>) obj;
         }
+    } catch (IOException | ClassNotFoundException e) {
+        e.printStackTrace();
     }
+}
 }

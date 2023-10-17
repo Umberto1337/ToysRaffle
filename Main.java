@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
         ToyStore toyStore = new ToyStore();
@@ -40,7 +41,7 @@ public class Main {
                     break;
                 case 3:
                     Toy prize = toyStore.drawPrize();
-                    if (prize != null) {
+                    if (prize != null && prize.getName() != null) {
                         System.out.println("Поздравляем! Вы выиграли " + prize.getName());
                     } else {
                         System.out.println("Извините, призы закончились.");
